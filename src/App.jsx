@@ -56,6 +56,22 @@ const App = () => {
   //   // setTask(updateTask);
   // };
 
+  // Retrieve Data //
+  useEffect(() => {
+    const Items = async () => {
+      try {
+        const lists = await axios.get(
+          "https://noteapp-ffoq.onrender.com/getItem"
+        );
+        const data = lists.data;
+        console.log(data);
+        setTask(data);
+      } catch (e) {
+        console.log(`${e}`);
+      }
+    };
+    Items();
+  }, []);
   //Adding and Updating task//
   const addTask = async (e) => {
     e.preventDefault();
@@ -82,23 +98,6 @@ const App = () => {
     }
   };
 
-  // Retrieve Data //
-  useEffect(() => {
-    const Items = async () => {
-      try {
-        const lists = await axios.get(
-          "https://noteapp-ffoq.onrender.com/getItem"
-        );
-        const data = lists.data;
-        console.log(data);
-        setTask(data);
-      } catch (e) {
-        console.log(`${e}`);
-      }
-    };
-    Items();
-  }, [text, isDeleted]);
-
   // Edit Item //
   const editFunc = async (id) => {
     try {
@@ -124,6 +123,12 @@ const App = () => {
       console.log(deletedTask);
     } catch (e) {
       console.log(`${e}`);
+      const lists = await axios.get(
+        "https://noteapp-ffoq.onrender.com/getItem"
+      );
+      const data = lists.data;
+      console.log(data);
+      setTask(data);
     }
   };
 
