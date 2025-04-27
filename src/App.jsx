@@ -97,7 +97,22 @@ const App = () => {
       }
     };
     Items();
-  }, [text, isDeleted]);
+  }, [text]);
+  useEffect(() => {
+    const Items = async () => {
+      try {
+        const lists = await axios.get(
+          "https://noteapp-ffoq.onrender.com/getItem"
+        );
+        const data = lists.data;
+        console.log(data);
+        setTask(data);
+      } catch (e) {
+        console.log(`${e}`);
+      }
+    };
+    Items();
+  }, [isDeleted]);
 
   // Edit Item //
   const editFunc = async (id) => {
