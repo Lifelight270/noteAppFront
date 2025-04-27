@@ -115,6 +115,7 @@ const App = () => {
 
   //Delete section//
   const deleteTask = async (id) => {
+    setTask((task) => task.filter((item) => item._id !== id));
     try {
       const deletedTask = axios.delete(
         `https://noteapp-ffoq.onrender.com/deleteTask/${id}`
@@ -123,12 +124,12 @@ const App = () => {
       console.log(deletedTask);
     } catch (e) {
       console.log(`${e}`);
-      const lists = await axios.get(
-        "https://noteapp-ffoq.onrender.com/getItem"
-      );
-      const data = lists.data;
-      console.log(data);
-      setTask(data);
+      // const lists = await axios.get(
+      //   "https://noteapp-ffoq.onrender.com/getItem"
+      // );
+      // const data = lists.data;
+      // console.log(data);
+      // setTask(data);
     }
   };
 
