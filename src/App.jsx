@@ -71,7 +71,7 @@ const App = () => {
       }
     };
     Items();
-  }, []);
+  }, [text, isDeleted]);
   //Adding and Updating task//
   const addTask = async (e) => {
     e.preventDefault();
