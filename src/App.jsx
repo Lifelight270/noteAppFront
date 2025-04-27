@@ -5,7 +5,7 @@ const App = () => {
   const [task, setTask] = useState([]);
   const [text, setText] = useState("");
   const [isEditing, setIsEditing] = useState(null);
-  const [isDeleted, setIsDeleted] = useState(null);
+  // const [isDeleted, setIsDeleted] = useState(null);
 
   // const addTask = async (e) => {
   //   e.preventDefault();
@@ -71,7 +71,7 @@ const App = () => {
       }
     };
     Items();
-  }, [text, isDeleted]);
+  }, [text]);
   //Adding and Updating task//
   const addTask = async (e) => {
     e.preventDefault();
@@ -120,7 +120,7 @@ const App = () => {
         `https://noteapp-ffoq.onrender.com/deleteTask/${id}`
       );
       setTask((task) => task.filter((item) => item._id !== id));
-      setIsDeleted(id);
+      // setIsDeleted(id);
       console.log(deletedTask);
     } catch (e) {
       console.log(`${e}`);
