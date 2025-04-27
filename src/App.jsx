@@ -115,11 +115,11 @@ const App = () => {
 
   //Delete section//
   const deleteTask = async (id) => {
-    setTask((task) => task.filter((item) => item._id !== id));
     try {
       const deletedTask = axios.delete(
         `https://noteapp-ffoq.onrender.com/deleteTask/${id}`
       );
+      setTask((task) => task.filter((item) => item._id !== id));
       setIsDeleted(id);
       console.log(deletedTask);
     } catch (e) {
