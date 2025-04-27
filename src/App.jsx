@@ -63,16 +63,13 @@ const App = () => {
       if (isEditing) {
         //https://noteapp-ffoq.onrender.com/
         //http://localhost:8000
-        await axios.put(
-          `https://noteapp-ffoq.onrender.com/editList/${isEditing}`,
-          {
-            name: text,
-          }
-        );
+        await axios.put(`${process.env.REACT_APP_API_URL}/${isEditing}`, {
+          name: text,
+        });
         setIsEditing(null);
         setText("");
       } else {
-        await axios.post("https://noteapp-ffoq.onrender.com/listnote", {
+        await axios.post(`${process.env.REACT_APP_API_URL}/listnote`, {
           name: text,
         });
         setText("");
@@ -87,7 +84,7 @@ const App = () => {
     const Items = async () => {
       try {
         const lists = await axios.get(
-          "https://noteapp-ffoq.onrender.com/getItem"
+          `${process.env.REACT_APP_API_URL}/getItem`
         );
         const data = lists.data;
         console.log(data);
@@ -103,7 +100,7 @@ const App = () => {
   const editFunc = async (id) => {
     try {
       const jj = await axios.get(
-        `https://noteapp-ffoq.onrender.com/editList/${id}`
+        `${process.env.REACT_APP_API_URL}/editList/${id}`
       );
       const data = jj.data;
       setText(data.name);
@@ -118,7 +115,7 @@ const App = () => {
   const deleteTask = async (id) => {
     try {
       const deletedTask = axios.delete(
-        `https://noteapp-ffoq.onrender.com/deleteTask/${id}`
+        `${process.env.REACT_APP_API_URL}/deleteTask/${id}`
       );
       setIsDeleted(id);
       console.log(deletedTask);
