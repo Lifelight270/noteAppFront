@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from "react";
+import TextField from "@mui/material/TextField";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Button from "@mui/material/Button";
 import axios from "axios";
+import "./App.css";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#F0F0F0", // custom blue
+      contrastText: "#fff",
+    },
+  },
+});
 
 const App = () => {
   const [task, setTask] = useState([]);
@@ -129,31 +143,79 @@ const App = () => {
 
   return (
     <>
-      <p>Note app</p>
-      <form onSubmit={addTask}>
-        <input
-          type="text"
-          name="name"
-          value={text}
-          placeholder="Enter Text"
-          onChange={(e) => setText(e.target.value)}
-        />
-        {/* <button>Add task</button> */}
+      <div className="note flex justify-center w-full ">
+        <p className="text-white font-800 text-[25px] tracking-1 pt-6 ">
+          Note App
+        </p>
+      </div>
+      <div className=" flex items-center justify-center h-screen w-full">
+        <div className="">
+          <form>
+            <ThemeProvider theme={theme}>
+              <TextField
+                id="standard-basic"
+                label="Take a note......"
+                variant="standard"
+                type="text"
+                name="name"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                color="primary"
+                sx={{
+                  "& label": {
+                    color: "#fff", // Before focus
+                  },
+                  "& .MuiInput-underline:before": {
+                    borderBottomColor: "#fff", // Default underline
+                  },
+                  "& .MuiInput-underline:hover:before": {
+                    borderBottomColor: "#E6E6E6", // Hover (not focused)
+                  },
+                  "& .MuiInput-underline:after": {
+                    borderBottomColor: "#fff", // Focus underline
+                  },
+                  "& input": {
+                    color: "	#fff", // Text color
+                  },
+                }}
+              />
+            </ThemeProvider>
+            {/* <button>Add task</button> */}
 
-        <button>{isEditing !== null ? "Update" : "Add Task"}</button>
-      </form>
-      {/* {task.map((item, i) => (
+            {/* <button>{isEditing !== null ? "Update" : "Add Task"}</button> */}
+            <span className="mr-6" />
+            <ThemeProvider theme={theme}>
+              <Button color="primary" variant="text" onClick={addTask}>
+                {isEditing !== null ? "Update" : "Add Task"}
+              </Button>
+            </ThemeProvider>
+          </form>
+
+          {/* {task.map((item, i) => (
         <p key={i}>{item.name}</p>
       ))} */}
-      <ol>
-        {task.map((item, index) => (
-          <li key={item._id || index}>
-            {item.name}
-            <button onClick={() => editFunc(item._id)}>Edit</button>
-            <button onClick={() => deleteTask(item._id)}>Delete</button>
-          </li>
-        ))}
-      </ol>
+          <ol style={{ listStyleType: "decimal" }} className="mt-6">
+            {task.map((item, index) => (
+              <li key={item._id || index}>
+                {item.name}
+                <span className="mr-12  " />
+                <ThemeProvider theme={theme}>
+                  <ButtonGroup variant="text" aria-label="Basic button group">
+                    <Button color="primary" onClick={() => editFunc(item._id)}>
+                      Edit
+                    </Button>
+                    <Button
+                      color="primary"
+                      onClick={() => deleteTask(item._id)}>
+                      Delete
+                    </Button>
+                  </ButtonGroup>
+                </ThemeProvider>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
     </>
   );
   x;
